@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Weather 🌾</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#"
+          ><img src="images/logo.png" alt="" class="nav-logo" /> Egypt
+          Weather</a
+        >
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="collapsibleNavId"
+        >
+          <ul class="navbar-nav mt-2 mt-lg-0">
+            <!-- <li class="nav-item">
+              <a class="nav-link active" href="#" aria-current="page"
+                >Home <span class="visually-hidden">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li> -->
+
+            <li class="nav-item">
+              <a href="" class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link active">News</a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link active">Live Cameras</a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link active">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pt-4 pb-4">
+      <div class="input-group w-75 pt-4 mx-auto">
+        <input
+          type="search"
+          class="form-control mx-auto"
+          name="search input"
+          id="searchInput"
+          aria-describedby="helpId"
+          placeholder="🔎  📌"
+        />
+        <button class="btn btn-dark" type="button" id="button-addon2">
+          Search
+        </button>
+      </div>
+
+      <div class="forecast-container container row mx-auto flex-lg-nowrap">
+        <div class="forecast-card p-0 col-lg-4">
+          <div
+            class="forcast-header p-2 d-flex justify-content-between align-items-end"
+          >
+            <p class="m-0">sunday</p>
+            <p class="m-0">sunday</p>
+          </div>
+          <div class="forcast-content p-4">
+            <p class="city fs-4">Cairo</p>
+            <p class="temp temp fw-semibold">
+              <span id="tempToday">28</span><sup>o</sup>C
+              <img src="images/logo.png" alt="" />
+            </p>
+
+            <p class="sunny text-info">sunny</p>
+            <div class="d-flex justify-content-around w-75 mt-4">
+              <span><img src="images/icon-umberella.png" alt="" /> 20%</span>
+              <span><img src="images/icon-wind.png" alt="" /> 18km/h</span>
+              <span><img src="images/icon-compass.png" alt="" /> East</span>
+            </div>
+          </div>
+        </div>
+        <div class="forecast-card p-0 col-lg-4">
+          <div
+            class="forcast-header p-2 d-flex justify-content-between align-items-end"
+          >
+            <p class="m-0">sunday</p>
+            <p class="m-0">sunday</p>
+          </div>
+          <div class="forcast-content p-4">
+            <p class="city fs-4">Cairo</p>
+            <p class="temp temp fw-semibold">
+              28<sup>o</sup>C <img src="images/logo.png" alt="" />
+            </p>
+
+            <p class="sunny text-info">sunny</p>
+            <div class="d-flex justify-content-around w-75 mt-4">
+              <span><img src="images/icon-umberella.png" alt="" /> 20%</span>
+              <span><img src="images/icon-wind.png" alt="" /> 18km/h</span>
+              <span><img src="images/icon-compass.png" alt="" /> East</span>
+            </div>
+          </div>
+        </div>
+        <div class="forecast-card p-0 col-lg-4">
+          <div
+            class="forcast-header p-2 d-flex justify-content-between align-items-end"
+          >
+            <p class="m-0">sunday</p>
+            <p class="m-0">sunday</p>
+          </div>
+          <div class="forcast-content p-4">
+            <p class="city fs-4">Cairo</p>
+            <p class="temp temp fw-semibold">
+              28<sup>o</sup>C <img src="images/logo.png" alt="" />
+            </p>
+
+            <p class="sunny text-info">sunny</p>
+            <div class="d-flex justify-content-around w-75 mt-4">
+              <span><img src="images/icon-umberella.png" alt="" /> 20%</span>
+              <span><img src="images/icon-wind.png" alt="" /> 18km/h</span>
+              <span><img src="images/icon-compass.png" alt="" /> East</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="">
+      <h1 id="x"></h1>
+    </footer>
+    <script src="bootstrap.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

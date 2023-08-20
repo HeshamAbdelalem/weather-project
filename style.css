@@ -1,0 +1,78 @@
+.active {
+  transition: all 200ms ease;
+}
+
+.active:hover {
+  color: #ffffb0 !important  ;
+}
+
+.nav-logo {
+  width: 50px;
+  margin-bottom: 6px;
+  margin-right: 6px;
+}
+
+main {
+  min-height: 352px;
+  background-image: url('images/banner.png');
+  background-color: #1e202b;
+  /* background-size: cover; */
+  /* background-position: 100% top; */
+  background-repeat: no-repeat;
+}
+
+.weather-cards {
+  margin-top: -40px;
+}
+
+.forecast-container {
+  margin-top: 200px;
+  color: #c4c4c4;
+}
+
+.temp {
+  color: #fff;
+  font-size: 4rem;
+}
+.forecast-card {
+  /* height: 300px; */
+  background-color: #262936;
+  overflow: hidden;
+}
+
+.forecast-card:nth-of-type(even) {
+  background-color: #323544;
+}
+
+.forecast-card:nth-of-type(even) .forcast-header {
+  background-color: #262936c7;
+}
+
+.forecast-card:nth-child(1) {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.forecast-card:nth-last-child(1) {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.forcast-header {
+  background-color: #1e202b;
+}
+
+footer {
+  background-color: #323544;
+  height: 500px;
+}
+
+@media screen and (max-width: 992px) {
+  .forecast-card:nth-child(1) {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .forecast-card:nth-last-child(1) {
+    border-radius: 0 0 10px 10px;
+  }
+}
