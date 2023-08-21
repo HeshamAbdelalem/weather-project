@@ -68,6 +68,10 @@ footer {
 }
 
 @media screen and (max-width: 992px) {
+  .forecast-container {
+    margin-top: 60px;
+  }
+
   .forecast-card:nth-child(1) {
     border-radius: 10px 10px 0 0;
   }
