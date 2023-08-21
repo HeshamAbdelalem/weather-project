@@ -11,8 +11,7 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand" href="#"
-          ><img src="images/logo.png" alt="" class="nav-logo" /> Egypt
-          Weather</a
+          ><img src="images/logo.png" alt="" class="nav-logo" /> Weather</a
         >
         <button
           class="navbar-toggler d-lg-none"
@@ -72,7 +71,7 @@
       </div>
 
       <div class="forecast-container container row mx-auto flex-lg-nowrap">
-        <div class="forecast-card p-0 col-lg-4">
+        <div class="forecast-card day-0 p-0 col-lg-4">
           <div
             class="forcast-header p-2 d-flex justify-content-between align-items-end"
           >
@@ -80,10 +79,14 @@
             <p class="m-0">sunday</p>
           </div>
           <div class="forcast-content p-4">
-            <p class="city fs-4">Cairo</p>
+            <p class="fs-4">
+              <span class="city">Cairo</span> ,<span class="region">Cairo</span
+              >,
+              <span class="country">Egypt</span>
+            </p>
             <p class="temp temp fw-semibold">
-              <span id="tempToday">28</span><sup>o</sup>C
-              <img src="images/logo.png" alt="" />
+              <span class="tempToday">28</span><sup>o</sup>C
+              <img src="images/logo.png" class="today-icon" />
             </p>
 
             <p class="sunny text-info">sunny</p>
@@ -94,7 +97,8 @@
             </div>
           </div>
         </div>
-        <div class="forecast-card p-0 col-lg-4">
+
+        <div class="forecast-card day-1 p-0 col-lg-4">
           <div
             class="forcast-header p-2 d-flex justify-content-between align-items-end"
           >
@@ -102,9 +106,12 @@
             <p class="m-0">sunday</p>
           </div>
           <div class="forcast-content p-4">
-            <p class="city fs-4">Cairo</p>
+            <p class="fs-4">
+              <span class="city">Cairo</span>
+            </p>
             <p class="temp temp fw-semibold">
-              28<sup>o</sup>C <img src="images/logo.png" alt="" />
+              <span class="tempToday">28</span><sup>o</sup>C
+              <img src="images/logo.png" class="today-icon" />
             </p>
 
             <p class="sunny text-info">sunny</p>
@@ -115,7 +122,8 @@
             </div>
           </div>
         </div>
-        <div class="forecast-card p-0 col-lg-4">
+
+        <div class="forecast-card day-2 p-0 col-lg-4">
           <div
             class="forcast-header p-2 d-flex justify-content-between align-items-end"
           >
@@ -123,9 +131,12 @@
             <p class="m-0">sunday</p>
           </div>
           <div class="forcast-content p-4">
-            <p class="city fs-4">Cairo</p>
+            <p class="fs-4">
+              <span class="city">Cairo</span>
+            </p>
             <p class="temp temp fw-semibold">
-              28<sup>o</sup>C <img src="images/logo.png" alt="" />
+              <span class="tempToday">28</span><sup>o</sup>C
+              <img src="images/logo.png" class="today-icon" />
             </p>
 
             <p class="sunny text-info">sunny</p>
