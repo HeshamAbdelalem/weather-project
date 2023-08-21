@@ -7,17 +7,18 @@ let country = document.querySelector('.country');
 let userLatitude;
 let userLongitude;
 let finalWeather;
-let userInput;
+let userInput = `${userLatitude},${userLongitude}`;
+// searchInput.value = userInput;
 
 // !Geo location
 
-// if (navigator.geolocation) {
-//   navigator.geolocation.getCurrentPosition(showPosition);
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(showPosition);
 
-//   console.log('location works 🎉✨');
-// } else {
-//   console.log('geolocation not supported by your browser');
-// }
+  console.log('location works 🎉✨');
+} else {
+  console.log('geolocation not supported by your browser');
+}
 
 function showPosition(position) {
   userLatitude = position.coords.latitude;
@@ -26,27 +27,19 @@ function showPosition(position) {
   console.log(userLatitude, userLongitude);
 }
 
-async function getLocation() {
-  return new Promise(function () {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-      console.log('location works 🎉✨');
-    } else {
-      console.log('geolocation not supported by your browser');
-    }
-  });
+if (userInput.length == 0) {
+  userInput = searchInput.value || `${userLatitude},${userLongitude}`;
 }
 
 // ! fetch api
-async function getUserCurrentWeather() {
+async function getUserCurrentWeather(a = userInput) {
   console.log('this is the user current weather func');
-  await getLocation();
 
   let weather = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=1689e76bab55400991481619231508&q=${userInput}`
+    `http://api.weatherapi.com/v1/current.json?key=1689e76bab55400991481619231508&q=${a}`
   );
-  displayHtml();
-  console.log(weather.json());
+  // displayHtml();
+  // console.log(weather.json());
   if (weather.status == 200) {
     console.log('status 200');
     console.log('from getusercurrentweather func', userLatitude, userLongitude);
@@ -89,11 +82,7 @@ function displayHtml() {
   // #day 2
 }
 
-async function doAll() {
-  await getLocation();
-  await getUserCurrentWeather();
-}
-
-doAll();
+// doAll();
 
 getUserCurrentWeather();
+// displayHtml();
