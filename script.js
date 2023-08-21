@@ -38,14 +38,14 @@ async function getUserCurrentWeather(lat = 30.0994522, long = 31.3328633) {
 
 async function searchWeather(location) {
   let weather = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=1689e76bab55400991481619231508&q=${location}`
+    `https://api.weatherapi.com/v1/current.json?key=1689e76bab55400991481619231508&q=${location}`
   );
 }
 
 searchInput.addEventListener('input', async function () {
   let userInput = this.value;
   let weather = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=1689e76bab55400991481619231508&q=${userInput}&days=3`
+    `https://api.weatherapi.com/v1/forecast.json?key=1689e76bab55400991481619231508&q=${userInput}&days=3`
   );
   let finalWeather = await weather.json();
 
