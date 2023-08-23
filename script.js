@@ -1,93 +1,69 @@
-let searchInput = document.querySelector('#searchInput');
-let todayTemp = document.querySelector('.tempToday');
-let feelsLike = document.querySelector('.feelsLike');
-let city = document.querySelector('.city');
-let region = document.querySelector('.region');
-let country = document.querySelector('.country');
-let userLatitude;
-let userLongitude;
+let searchInput = document.querySelector("#searchInput");
+let todayTemp = document.querySelector(".tempToday");
+let feelsLike = document.querySelector(".feelsLike");
+let city = document.querySelector(".city");
+let region = document.querySelector(".region");
+let country = document.querySelector(".country");
 let finalWeather;
-let userInput = `${userLatitude},${userLongitude}`;
+let userInput = "";
 
-// !Geo location
-
-function getLongAndLat() {
-  return new Promise((resolve, reject) =>
-    navigator.geolocation.getCurrentPosition(resolve, reject)
-  );
+async function getLongAndLat() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
 }
 
-let userPosition = async () => {
+async function fetchWeatherAndUpdateUI(location) {
   try {
-    let position = await getLongAndLat();
-    userLatitude = position.coords.latitude;
-    userLongitude = position.coords.longitude;
-
-    console.log(userLatitude, userLongitude);
-
-    await getUserCurrentWeather(userLatitude, userLongitude, displayHtml);
-  } catch {
-    console.log(e.message);
-  }
-};
-
-if (userInput.length == 0) {
-  userInput = searchInput.value || `${userLatitude},${userLongitude}`;
-}
-
-// ! fetch api
-async function getUserCurrentWeather(userLatitude, userLongitude, callback) {
-  console.log('this is the user current weather func');
-
-  let weather = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=1689e76bab55400991481619231508&q=${userLatitude},${userLongitude}`
-  );
-  if (weather.status == 200) {
-    console.log('status 200');
-    console.log('from getusercurrentweather func', userLatitude, userLongitude);
+    let weatherResponse = await fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=1689e76bab55400991481619231508&q=${location}&days=3`
+    );
+    let weatherData = await weatherResponse.json();
+    finalWeather = weatherData;
+    displayHtml();
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
   }
 }
-
-userInput = `${userLatitude},${userLongitude}`;
-console.log('userInput: ', userInput);
-
-searchInput.addEventListener('input', async function () {
-  console.log('userInput: ', userLatitude, userLongitude);
-
-  userInput = this.value || `${userLatitude},${userLongitude}`;
-  console.log('userInput: ', userInput);
-
-  let weather = await fetch(
-    `https://api.weatherapi.com/v1/forecast.json?key=1689e76bab55400991481619231508&q=${userInput}&days=3`
-  );
-  finalWeather = await weather.json();
-
-  console.log('final weather:', finalWeather);
-  callback = displayHtml();
-});
 
 function displayHtml() {
-  // # day 0
+  if (finalWeather && finalWeather.current) {
+    todayTemp.innerHTML = finalWeather.current.temp_c;
+    feelsLike.innerHTML = finalWeather.current.feelslike_c;
+    city.innerHTML = finalWeather.location.name + ", ";
+    region.innerHTML = finalWeather.location.region + ", ";
+    country.innerHTML = finalWeather.location.country;
 
-  todayTemp.innerHTML = finalWeather.current.temp_c;
-  document.querySelector('.day-0 .sunny').innerHTML =
-    finalWeather.current.condition.text;
-
-  document
-    .querySelector('.day-0 .today-icon')
-    .setAttribute('src', finalWeather.current.condition.icon);
-  feelsLike.innerHTML = finalWeather.current.feelslike_c;
-  city.innerHTML = finalWeather.location.name + ', ';
-  region.innerHTML = finalWeather.location.region + ', ';
-  country.innerHTML = finalWeather.location.country;
-
-  //  #day 1
-  document.querySelector('.day-1 .tempToday').innerHTML =
-    finalWeather.forecast.forecastday[1].day.avgtemp_c;
-  document.querySelector('.day-1 .city').innerHTML = city.innerHTML;
-  // document.querySelector('.day-1 .region') = city.innerHTML;
-
-  // #day 2
+    if (finalWeather.forecast && finalWeather.forecast.forecastday[1]) {
+      document.querySelector(".day-1 .tempToday").innerHTML =
+        finalWeather.forecast.forecastday[1].day.avgtemp_c;
+      document.querySelector(".day-1 .city").innerHTML = city.innerHTML;
+    }
+  } else {
+    console.error("Weather data is not available or is incomplete.");
+  }
 }
 
-userPosition();
+searchInput.addEventListener("input", async function () {
+  const inputValue = this.value.trim();
+
+  if (inputValue.length >= 3) {
+    userInput = inputValue;
+    await fetchWeatherAndUpdateUI(userInput);
+  }
+});
+
+async function getUserPositionAndWeather() {
+  try {
+    let position = await getLongAndLat();
+    let userLatitude = position.coords.latitude;
+    let userLongitude = position.coords.longitude;
+    let userLocation = `${userLatitude},${userLongitude}`;
+    userInput = userLocation;
+    await fetchWeatherAndUpdateUI(userLocation);
+  } catch (error) {
+    console.error("Error getting user position:", error);
+  }
+}
+
+getUserPositionAndWeather();
