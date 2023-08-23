@@ -8,46 +8,54 @@ let userLatitude;
 let userLongitude;
 let finalWeather;
 let userInput = `${userLatitude},${userLongitude}`;
-// searchInput.value = userInput;
 
 // !Geo location
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(showPosition);
-
-  console.log('location works 🎉✨');
-} else {
-  console.log('geolocation not supported by your browser');
+function getLongAndLat() {
+  return new Promise((resolve, reject) =>
+    navigator.geolocation.getCurrentPosition(resolve, reject)
+  );
 }
 
-function showPosition(position) {
-  userLatitude = position.coords.latitude;
-  userLongitude = position.coords.longitude;
+let userPosition = async () => {
+  try {
+    let position = await getLongAndLat();
+    userLatitude = position.coords.latitude;
+    userLongitude = position.coords.longitude;
 
-  console.log(userLatitude, userLongitude);
-}
+    console.log(userLatitude, userLongitude);
+
+    await getUserCurrentWeather(userLatitude, userLongitude, displayHtml);
+  } catch {
+    console.log(e.message);
+  }
+};
 
 if (userInput.length == 0) {
   userInput = searchInput.value || `${userLatitude},${userLongitude}`;
 }
 
 // ! fetch api
-async function getUserCurrentWeather(a = userInput) {
+async function getUserCurrentWeather(userLatitude, userLongitude, callback) {
   console.log('this is the user current weather func');
 
   let weather = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=1689e76bab55400991481619231508&q=${a}`
+    `http://api.weatherapi.com/v1/current.json?key=1689e76bab55400991481619231508&q=${userLatitude},${userLongitude}`
   );
-  // displayHtml();
-  // console.log(weather.json());
   if (weather.status == 200) {
     console.log('status 200');
     console.log('from getusercurrentweather func', userLatitude, userLongitude);
   }
 }
 
+userInput = `${userLatitude},${userLongitude}`;
+console.log('userInput: ', userInput);
+
 searchInput.addEventListener('input', async function () {
-  userInput = searchInput.value || `${userLatitude},${userLongitude}`;
+  console.log('userInput: ', userLatitude, userLongitude);
+
+  userInput = this.value || `${userLatitude},${userLongitude}`;
+  console.log('userInput: ', userInput);
 
   let weather = await fetch(
     `https://api.weatherapi.com/v1/forecast.json?key=1689e76bab55400991481619231508&q=${userInput}&days=3`
@@ -55,7 +63,7 @@ searchInput.addEventListener('input', async function () {
   finalWeather = await weather.json();
 
   console.log('final weather:', finalWeather);
-  displayHtml();
+  callback = displayHtml();
 });
 
 function displayHtml() {
@@ -82,7 +90,4 @@ function displayHtml() {
   // #day 2
 }
 
-// doAll();
-
-getUserCurrentWeather();
-// displayHtml();
+userPosition();
